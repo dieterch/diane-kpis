@@ -12,6 +12,7 @@ Public Class PrimaryMSG
     Public Property MSGCombination As String
     Public Property MSGNo As Integer
 End Class
+
 Friend Class EngineAction
     Public Property Action_Actual As Engine_Action
     Public Property Action_From As Date
@@ -30,6 +31,7 @@ Friend Class EngineAction
         Reset_List = New List(Of MSG)
         AV_MAN_Activated_Status = Available_States.Undefined
     End Sub
+
 End Class
 Public Class ActionDB
     Public Sub New()
@@ -53,26 +55,6 @@ Public Class ActionDB
     Public Property AV_MAN_Activated_Status As Available_States
     Public Property CalcDate As DateTime
 End Class
-Public Enum Engine_Action
-    Undefinded = 0
-    Data_GAP = 2
-    Start_Preparation = 4
-    Start = 6
-    Idle = 8
-    Synchronisation = 10
-    Operation = 12
-    RampUp_Mains_Parallel_Operation = 14
-    Mains_Parallel_Operation = 16
-    RampUp_Island_Operation = 18
-    Island_Operation = 20
-    Load_Rampdown = 22
-    Engine_Cooldown = 24
-    Ready = 26
-    Not_Ready = 28
-    Mains_Failure = 30
-    Forced_Outage = 32
-    Troubleshooting = 34
-End Enum
 
 Public Enum ServiceSelectorSwitch_States
     Undefined = 0
@@ -80,6 +62,7 @@ Public Enum ServiceSelectorSwitch_States
     MAN = 4
     AUTO = 6
 End Enum
+
 Public Enum DemandSelectorSwitch_States
     Undefined = 0
     OFF = 2
@@ -104,6 +87,7 @@ Public Enum Delay_Ckeck
     NetzStörung = 3
     RemoteReset = 4
 End Enum
+
 #Region "Rosenheim RAM meldungen"
 'Public Enum MSG_Trigger As Short
 '    BWS_AUS = 1225
@@ -202,6 +186,7 @@ End Enum
 
 'End Enum
 #End Region
+
 #Region "New fleed values RAM meldungen"
 Public Enum MSG_Trigger As Short
     BWS_AUS = 1225
