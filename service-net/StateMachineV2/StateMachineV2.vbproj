@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>GE.Myplant.StateMachineV2</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PrimaryTripTable.csv" />
+    <None Remove="Responsibility.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="PrimaryTripTable.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Responsibility.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\commons.net\commons.net\commons.net.csproj" />
+  </ItemGroup>
+
+</Project>

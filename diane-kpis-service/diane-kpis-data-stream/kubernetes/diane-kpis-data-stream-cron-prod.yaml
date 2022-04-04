@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: diane-kpis-data-stream-cron
+  namespace: data-ingestion
+spec:
+  schedule: "0 1 * * *" # every day 1 hour after midnight; to give some time for the data to arrive
+  concurrencyPolicy: Allow
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            task-name: diane-kpis-data-stream
+        spec:
+          imagePullSecrets:
+            - name: regsecret
+          containers:
+            - name: diane-kpis-data-stream
+              image: myplantrepo/images:diane-kpis-data-stream_3.0.6
+              imagePullPolicy: Always
+              args:
+                - --spring.profiles.active=production-io
+              resources:
+                limits:
+                  cpu: 1.5
+                  memory: 5Gi
+                requests:
+                  cpu: 1
+                  memory: 5Gi
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: -XX:MaxRAMPercentage=90
+          restartPolicy: OnFailure

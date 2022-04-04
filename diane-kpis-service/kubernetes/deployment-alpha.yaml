@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: diane-kpis
+  namespace: web-service-alpha
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      name: diane-kpis
+      namespace: web-service-alpha
+      labels:
+        app: diane-kpis
+    spec:
+      imagePullSecrets:
+      - name: regsecret
+      containers:
+      - name: diane-kpis
+        image: myplantrepo/images:diane-kpis_0.16.18
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: public
+        resources:
+          limits:
+            cpu: 1
+            memory: 6.5Gi
+          requests:
+            cpu: 0.5
+            memory: 6.5Gi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: alpha
+        - name: CREATE_STATEMACHINE_CRON
+          value: 0 50 15 * * *
+        - name: CALCULATION_SVC_URL
+          value: http://${STATE_MACHINE_V2_SERVICE_HOST}:${STATE_MACHINE_V2_SERVICE_PORT}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: public
+            scheme: HTTP
+          initialDelaySeconds: 100
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /info
+            port: public
+            scheme: HTTP
+          initialDelaySeconds: 100
+          timeoutSeconds: 5

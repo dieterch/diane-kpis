@@ -1,0 +1,4 @@
+rootProject.name = 'diane-kpis'
+include 'diane-kpis-service:diane-kpis-data-stream'
+include 'diane-kpis-service:diane-kpis-ws'
+include 'diane-kpis-service:diane-kpis-common'

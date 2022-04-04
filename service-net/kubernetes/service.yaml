@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: state-machine-v2
+  namespace: data-ingestion
+spec:
+  ports:
+    - port: 8080
+      name: public
+  selector:
+    app: state-machine-v2

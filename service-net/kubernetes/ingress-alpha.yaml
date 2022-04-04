@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: state-machine-v2-alpha
+  namespace: web-service-alpha
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: 300m
+    ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /alpha/ws/state-machine
+          backend:
+            serviceName: state-machine-v2-service
+            servicePort: 8080
+

@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: state-machine-v2-private
+  namespace: web-service-beta
+  annotations:
+    kubernetes.io/ingress.class: "nginx-internal"
+    nginx.ingress.kubernetes.io/proxy-body-size: 300m
+    nginx.ingress.kubernetes.io/rewrite-target: /private
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /beta/private/state-machine
+          backend:
+            serviceName: state-machine-v2-service
+            servicePort: 8080
+

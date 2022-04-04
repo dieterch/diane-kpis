@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: diane-kpis
+  namespace: web-service
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /ws/diane-kpis
+            backend:
+              serviceName: diane-kpis
+              servicePort: 8080

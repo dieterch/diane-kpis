@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: diane-kpis-alpha
+  namespace: web-service-alpha
+spec:
+  ports:
+    - port: 8080
+      name: public
+  selector:
+    app: diane-kpis-alpha
